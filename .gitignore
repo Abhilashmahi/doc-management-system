@@ -1,0 +1,31 @@
+# Secrets: never commit real passwords
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+
+# Dependencies and build output
+node_modules/
+dist/
+build/
+coverage/
+
+# Uploaded files and local storage (added later)
+storage/
+uploads/
+
+# Editor and OS files
+.vscode/
+.idea/
+*.log
+Thumbs.db
+.DS_Store
+
+# TypeScript build cache
+*.tsbuildinfo
+
+# Playwright output
+test-results/
+playwright-report/

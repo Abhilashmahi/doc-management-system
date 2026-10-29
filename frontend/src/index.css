@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+/* `dark:` utilities follow the "dark" class on <html> (set by lib/theme.ts), not only the system setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Cards, panels, inputs. Use bg-surface instead of bg-white so they follow the theme. */
+  --color-surface: #ffffff;
+  /* Dark chips that stay dark in both themes: toasts, tooltips, the bulk-action bar. */
+  --color-ink: #0f172a;
+  --color-page: #f8fafc;
+}
+
+:root {
+  color-scheme: light;
+  --color-brand: #4f46e5;
+}
+
+body {
+  margin: 0;
+  background: var(--color-page);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------- Dark theme ----------
+   The gray (slate) scale is reversed, so "light gray background" becomes "dark gray background" and "dark text"
+   becomes "light text" everywhere without editing each page. Light colored tints (…-50/100/200) become dim tints,
+   and colored text is lifted so it stays readable. Designs on the canvas keep their own colors. */
+html.dark {
+  color-scheme: dark;
+  --color-page: #0c1220;
+  --color-surface: #172133;
+  --color-ink: #334155;
+
+  --color-slate-50: #111a29;
+  --color-slate-100: #1f2a3c;
+  --color-slate-200: #2b3749;
+  --color-slate-300: #3b4a60;
+  --color-slate-400: #74839a;
+  --color-slate-500: #94a3b8;
+  --color-slate-600: #a8b4c6;
+  --color-slate-700: #c8d1de;
+  --color-slate-800: #e2e8f0;
+  --color-slate-900: #f1f5f9;
+  --color-slate-950: #f8fafc;
+
+  --color-red-50: color-mix(in oklab, #ef4444 14%, #172133);
+  --color-red-100: color-mix(in oklab, #ef4444 22%, #172133);
+  --color-red-200: color-mix(in oklab, #ef4444 40%, #172133);
+  --color-amber-50: color-mix(in oklab, #f59e0b 12%, #172133);
+  --color-amber-100: color-mix(in oklab, #f59e0b 20%, #172133);
+  --color-amber-200: color-mix(in oklab, #f59e0b 36%, #172133);
+  --color-indigo-50: color-mix(in oklab, #6366f1 16%, #172133);
+  --color-indigo-100: color-mix(in oklab, #6366f1 26%, #172133);
+  --color-indigo-200: color-mix(in oklab, #6366f1 42%, #172133);
+  --color-purple-50: color-mix(in oklab, #a855f7 16%, #172133);
+  --color-purple-100: color-mix(in oklab, #a855f7 26%, #172133);
+  --color-purple-200: color-mix(in oklab, #a855f7 42%, #172133);
+  --color-emerald-50: color-mix(in oklab, #10b981 14%, #172133);
+  --color-emerald-200: color-mix(in oklab, #10b981 38%, #172133);
+  --color-sky-50: color-mix(in oklab, #0ea5e9 14%, #172133);
+  --color-sky-200: color-mix(in oklab, #0ea5e9 38%, #172133);
+}
+
+/* Colored text: the 600-900 shades are too dark to read on a dark background. */
+html.dark :is(.text-red-600, .text-red-700, .text-red-800, .hover\:text-red-600:hover) { color: #f87171; }
+html.dark .text-red-900\/80 { color: #fca5a5; }
+html.dark :is(.text-amber-700, .text-amber-800, .text-amber-900) { color: #fcd34d; }
+html.dark :is(.text-indigo-500, .text-indigo-600, .text-indigo-700) { color: #a5b4fc; }
+html.dark :is(.hover\:text-indigo-700:hover, .hover\:text-indigo-800:hover) { color: #c7d2fe; }
+html.dark .text-purple-700 { color: #d8b4fe; }
+html.dark :is(.text-emerald-600, .text-emerald-700) { color: #6ee7b7; }
+html.dark .text-sky-700 { color: #7dd3fc; }
+
+/* Form controls without their own background class. */
+html.dark :is(input, select, textarea):not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="color"]):not([class*="bg-"]) {
+  background-color: var(--color-surface);
+  color: var(--color-slate-900);
+}
+html.dark ::placeholder { color: var(--color-slate-400); }
